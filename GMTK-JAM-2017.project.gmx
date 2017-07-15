@@ -5,9 +5,21 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_char</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts"/>
+  <objects name="objects">
+    <object>objects\obj_char</object>
+    <object>objects\obj_ground</object>
+    <object>objects\obj_ladder</object>
+    <object>objects\obj_ladderEvent</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\room_title</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
