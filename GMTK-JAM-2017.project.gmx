@@ -7,11 +7,29 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_char</sprite>
+    <sprite>sprites\spr_ground</sprite>
+    <sprite>sprites\spr_zombie</sprite>
+    <sprite>sprites\spr_easytrap</sprite>
+    <sprite>sprites\spr_gore</sprite>
+    <sprite>sprites\spr_survivor_gun_attack</sprite>
+    <sprite>sprites\spr_survivor_gun_move</sprite>
+    <sprite>sprites\spr_survivor_jump</sprite>
+    <sprite>sprites\spr_survivor_knife_attack</sprite>
+    <sprite>sprites\spr_survivor_knife_move</sprite>
+    <sprite>sprites\spr_survivor_rifle_attack</sprite>
+    <sprite>sprites\spr_survivor_rifle_move</sprite>
+    <sprite>sprites\spr_survivor_smg_attack</sprite>
+    <sprite>sprites\spr_survivor_smg_move</sprite>
+    <sprite>sprites\spr_survivor_walk</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
-  <scripts name="scripts"/>
+  <fonts name="fonts">
+    <font>fonts\font_gameover</font>
+    <font>fonts\font_score</font>
+  </fonts>
   <objects name="objects">
+    <object>objects\obj_director</object>
     <object>objects\obj_char</object>
     <object>objects\obj_ground</object>
     <object>objects\obj_ladder</object>
@@ -22,9 +40,13 @@
     <object>objects\obj_armorzombie</object>
     <object>objects\obj_tankzombie</object>
     <object>objects\obj_spitterzombie</object>
+    <object>objects\obj_easytrap</object>
+    <object>objects\obj_gore</object>
+    <object>objects\obj_gameover</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room_title</room>
+    <room>rooms\rm_title</room>
+    <room>rooms\rm_main</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

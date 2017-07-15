@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,9 +25,49 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>damage = 10
-count = 0
-hspeed = 20
+            <string>//generation script
+difficulty = 0 
+//0 = normal zombies, easy obstacles
+//1 = armoreod zombies, buildings start to appear, doors
+//2 = muscular zombies, harder obstacles - cars and signs
+//3 = spitter zombies, zombies become faster, easy obstacles replaced with insta-kill
+//4 = lighthouse sequence (???)
+highscore = 0
+
+roomOffsetY = 768
+
+alarm_set(0, 90) //alarm for generation
+alarm_set(1, 900) //alarm for increasing difficulty
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if difficulty == 0 { //70% zombie, 30% trap
+    if irandom_range(1,10) &gt; 7 { 
+        instance_create(room_width, roomOffsetY, obj_zombie)
+    } else {
+        instance_create(room_width, roomOffsetY, obj_easytrap)
+    }
+    alarm_set(0,irandom_range(60,100))
+}
 </string>
           </argument>
         </arguments>
@@ -50,19 +90,13 @@ hspeed = 20
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//script for smg
-if count &gt; 0 {
-    count--
-    bullet = instance_create(self.x - 3, self.y, obj_bullet)
-    bullet.damage = self.damage
-    bullet.vspeed = random_range(-1,1)
-}
+            <string>highscore += 1
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_enemy">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -79,17 +113,8 @@ if count &gt; 0 {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//deal damage
-if other.hp &gt; 0{
-    other.health -= damage
-    if other.health == 0{
-        with(other){
-            instance_destroy()
-        }
-    }
-    instance_destroy()
-}
-
+            <string>draw_set_font(font_score)
+draw_text(32,32,"Score: "+self.highscore)
 </string>
           </argument>
         </arguments>
