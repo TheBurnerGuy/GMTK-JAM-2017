@@ -16,6 +16,12 @@
     <object>objects\obj_ground</object>
     <object>objects\obj_ladder</object>
     <object>objects\obj_ladderEvent</object>
+    <object>objects\obj_enemy</object>
+    <object>objects\obj_bullet</object>
+    <object>objects\obj_zombie</object>
+    <object>objects\obj_armorzombie</object>
+    <object>objects\obj_tankzombie</object>
+    <object>objects\obj_spitterzombie</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_title</room>
