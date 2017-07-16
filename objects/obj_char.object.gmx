@@ -42,10 +42,11 @@ ladderOffset = 10 //offset to ladder in order to trigger climbing (CHANGE LATER!
 ladderCreateOffset = 60 //offset to show key spamming thing
 ladderClimbRate = 10
 enemyOffset = 48 //for slashing hit detection
-bulletOffsetX = 20
-bulletOffsetY = 0
+bulletOffsetX = 42
+bulletOffsetY = -14
 defaultImageSpeed = 1
 slashImageSpeed = 0.5
+shootImageSpeed = 0.5
 
 
 alarm_set(0,4)
@@ -263,23 +264,42 @@ if combatButton and canFight{
     if slashConfirm {
         sprite_index = spr_survivor_knife_attack
         image_speed = slashImageSpeed
+        canFight = false
     //else gun
     }else if rifle &gt; 0{
+        rifle--
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
         bullet.damage = rifleDmg
-    }else if smg &gt; 0{
+        sprite_index = spr_survivor_rifle_attack
+        image_index = 0
+        image_speed = shootImageSpeed
+    }else if smg &gt; 2{
+        smg -= 3
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
         bullet.damage = smgDmg
         bullet.count = 2
+        sprite_index = spr_survivor_smg_attack
+        image_index = 0
+        image_speed = shootImageSpeed
     }else if pistol &gt; 0{
+        pistol--
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
         bullet.damage = pistolDmg
+        sprite_index = spr_survivor_gun_attack
+        image_index = 0
+        image_speed = shootImageSpeed
     }
 }
 
 //Action
 if actionButton and canAction{
-
+    if place_meeting(self.x, self.y, obj_gunstore){
+    
+    }else if place_meeting(self.x, self.y, obj_bookstore){
+    
+    }else if place_meeting(self.x, self.y, obj_pawnstore){
+    
+    }
 }
 
 //collision checking for jumping
@@ -290,12 +310,6 @@ if ground != noone{
 }else{
     self.y += verticalSpeed
     verticalSpeed += vertGravity
-}
-
-//ending stab animation
-if not instance_exists(obj_slash){
-    sprite_index = spr_survivor_walk
-    image_speed = defaultImageSpeed
 }
 </string>
           </argument>
@@ -347,6 +361,36 @@ else{
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//reset gun animation
+if sprite_index == spr_survivor_rifle_attack
+        or sprite_index == spr_survivor_smg_attack
+        or sprite_index == spr_survivor_gun_attack
+        or sprite_index == spr_survivor_knife_attack{
+    sprite_index = spr_survivor_walk
+    image_speed = defaultImageSpeed
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>

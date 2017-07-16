@@ -22,6 +22,8 @@
     <sprite>sprites\spr_survivor_smg_move</sprite>
     <sprite>sprites\spr_survivor_walk</sprite>
     <sprite>sprites\spr_slash</sprite>
+    <sprite>sprites\spr_bullet</sprite>
+    <sprite>sprites\spr_gunstore</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -47,6 +49,9 @@
     <object>objects\obj_gameover</object>
     <object>objects\obj_parentbuilding</object>
     <object>objects\obj_slash</object>
+    <object>objects\obj_gunstore</object>
+    <object>objects\obj_bookstore</object>
+    <object>objects\obj_pawnstore</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>

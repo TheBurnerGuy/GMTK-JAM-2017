@@ -33,12 +33,47 @@ difficulty = 0
 //3 = spitter zombies, zombies become faster, easy obstacles replaced with insta-kill
 //4 = lighthouse sequence (???)
 highscore = 0
+newDifficulty = false
+
 
 roomOffsetY1 = 724 //for zombies
 roomOffsetY2 = 784 //for traps
+roomOffsetY3 = 640 //for shops
 
 alarm_set(0, 90) //alarm for generation
-alarm_set(1, 900) //alarm for increasing difficulty
+alarm_set(1, 1200) //alarm for increasing difficulty
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//increase difficulty
+difficulty++
+newDifficulty = true
+if difficulty == 1{
+    //alarm_set(1,1500)
+}else if difficulty == 2{
+    //alarm_set(1,1800)
+}else if difficulty == 3{
+    //alarm_set(1,2100)
+}
 </string>
           </argument>
         </arguments>
@@ -68,6 +103,26 @@ alarm_set(1, 900) //alarm for increasing difficulty
         instance_create(room_width, roomOffsetY2, obj_easytrap)
     }
     alarm_set(0,irandom_range(40,70))
+}
+
+if difficulty == 1 { //50% zombie, 20% armored zombie, 20% trap, 10% store
+    if newDifficulty{
+        newDifficulty = false
+        instance_create(room_width, roomOffsetY3, obj_gunstore)
+    }
+    else{
+        var tempRand = irandom_range(1,10)
+        if tempRand &gt; 5{
+            instance_create(room_width, roomOffsetY1, obj_zombie)
+        }else if tempRand &gt; 3{
+            instance_create(room_width, roomOffsetY1, obj_armorzombie)
+        }else if tempRand &gt; 1{
+            instance_create(room_width, roomOffsetY2, obj_easytrap)
+        }else{
+            instance_create(room_width, roomOffsetY3, obj_gunstore)//may replace later
+        }
+    }
+    alarm_set(0,irandom_range(35,60))
 }
 </string>
           </argument>
