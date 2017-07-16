@@ -218,7 +218,7 @@ if difficulty == 4 {
           <argument>
             <kind>1</kind>
             <string>draw_set_font(font_score)
-draw_text(32,32,"Score: "+self.highscore)
+draw_text(32,32,"Score: "+string_digits(string_format(self.highscore,32,0)))
 </string>
           </argument>
         </arguments>
