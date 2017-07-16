@@ -80,11 +80,15 @@ if count &gt; 0 {
           <argument>
             <kind>1</kind>
             <string>//deal damage
-if other.hp &gt; 0{
+if other.health &gt; 0{
     other.health -= damage
-    if other.health == 0{
+    if other.health &lt;= 0{
         with(other){
             instance_destroy()
+        }
+    }else{
+        with(other){
+            alarm_set(0,1)
         }
     }
     instance_destroy()

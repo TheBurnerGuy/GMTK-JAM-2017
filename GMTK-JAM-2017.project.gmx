@@ -24,9 +24,26 @@
     <sprite>sprites\spr_slash</sprite>
     <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_gunstore</sprite>
+    <sprite>sprites\spr_bookstore</sprite>
+    <sprite>sprites\spr_pawnstore</sprite>
+    <sprite>sprites\spr_bigzombie_move</sprite>
+    <sprite>sprites\spr_spitzombie_idle</sprite>
+    <sprite>sprites\spr_spitzombie_spit</sprite>
+    <sprite>sprites\spr_zombie0_move</sprite>
+    <sprite>sprites\spr_zombie1_move</sprite>
+    <sprite>sprites\spr_zombie2_move</sprite>
+    <sprite>sprites\spr_zombie3_move</sprite>
+    <sprite>sprites\spr_zombiehealth</sprite>
+    <sprite>sprites\spr_zombiebar</sprite>
+    <sprite>sprites\spr_armoredbar</sprite>
+    <sprite>sprites\spr_tankbar</sprite>
+    <sprite>sprites\spr_spitterbar</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\script_outofbounds.gml</script>
+  </scripts>
   <fonts name="fonts">
     <font>fonts\font_gameover</font>
     <font>fonts\font_score</font>
@@ -52,6 +69,8 @@
     <object>objects\obj_gunstore</object>
     <object>objects\obj_bookstore</object>
     <object>objects\obj_pawnstore</object>
+    <object>objects\obj_healthbar</object>
+    <object>objects\obj_healthMeter</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>

@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -68,12 +68,12 @@ alarm_set(1, 1200) //alarm for increasing difficulty
 difficulty++
 newDifficulty = true
 if difficulty == 1{
-    //alarm_set(1,1500)
+    alarm_set(1,1700)
 }else if difficulty == 2{
-    //alarm_set(1,1800)
-}else if difficulty == 3{
-    //alarm_set(1,2100)
-}
+    alarm_set(1,3000)
+}//else if difficulty == 3{
+//    alarm_set(1,3000)
+//}
 </string>
           </argument>
         </arguments>
@@ -119,10 +119,58 @@ if difficulty == 1 { //50% zombie, 20% armored zombie, 20% trap, 10% store
         }else if tempRand &gt; 1{
             instance_create(room_width, roomOffsetY2, obj_easytrap)
         }else{
-            instance_create(room_width, roomOffsetY3, obj_gunstore)//may replace later
+            instance_create(room_width, roomOffsetY3, obj_gunstore)
         }
     }
     alarm_set(0,irandom_range(35,60))
+}
+
+if difficulty == 2 { //30% zombie, 30% armored, 20% tank, 10% trap, 10% store
+    if newDifficulty{
+        newDifficulty = false
+        instance_create(room_width, roomOffsetY3, obj_bookstore)
+    }
+    else{
+        var tempRand = irandom_range(1,10)
+        if tempRand &gt; 7{
+            instance_create(room_width, roomOffsetY1, obj_zombie)
+        }else if tempRand &gt; 4{
+            instance_create(room_width, roomOffsetY1, obj_armorzombie)
+        }else if tempRand &gt; 2{
+            instance_create(room_width, roomOffsetY1, obj_tankzombie)
+        }else if tempRand &gt; 1{
+            instance_create(room_width, roomOffsetY2, obj_easytrap)
+        }else{
+            instance_create(room_width, roomOffsetY3, obj_gunstore)
+        }
+    }
+    alarm_set(0,irandom_range(25,50))
+}
+
+if difficulty == 3 { //30% armored, 20% tank, 20% spitter, 20% trap, 10% store
+    if newDifficulty{
+        newDifficulty = false
+        instance_create(room_width, roomOffsetY3, obj_pawnstore)
+    }
+    else{
+        var tempRand = irandom_range(1,10)
+        if tempRand &gt; 7{
+            instance_create(room_width, roomOffsetY1, obj_armorzombie)
+        }else if tempRand &gt; 5{
+            instance_create(room_width, roomOffsetY1, obj_tankzombie)
+        }else if tempRand &gt; 3{
+            instance_create(room_width, roomOffsetY2, obj_spitterzombie)
+        }else if tempRand &gt; 1{
+            instance_create(room_width, roomOffsetY2, obj_easytrap)
+        }else{
+            instance_create(room_width, roomOffsetY3, obj_gunstore)
+        }
+    }
+    alarm_set(0,irandom_range(20,35))
+}
+
+if difficulty == 4 { 
+    //victory!!! TODO
 }
 </string>
           </argument>
