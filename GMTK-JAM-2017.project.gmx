@@ -53,6 +53,23 @@
     <sprite>sprites\spr_spitsmear</sprite>
     <sprite>sprites\spr_swatzombie0_move</sprite>
     <sprite>sprites\spr_swatzombie1_move</sprite>
+    <sprite>sprites\spr_shadowbg</sprite>
+    <sprite>sprites\spr_house1</sprite>
+    <sprite>sprites\spr_house2</sprite>
+    <sprite>sprites\spr_house3</sprite>
+    <sprite>sprites\spr_pistol</sprite>
+    <sprite>sprites\spr_smg</sprite>
+    <sprite>sprites\spr_rifle</sprite>
+    <sprite>sprites\spr_instructions</sprite>
+    <sprite>sprites\spr_sky</sprite>
+    <sprite>sprites\spr_paper</sprite>
+    <sprite>sprites\spr_pistolbook</sprite>
+    <sprite>sprites\spr_smgbook</sprite>
+    <sprite>sprites\spr_riflebook</sprite>
+    <sprite>sprites\spr_title</sprite>
+    <sprite>sprites\spr_tower1</sprite>
+    <sprite>sprites\spr_tower2</sprite>
+    <sprite>sprites\spr_tower3</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -79,6 +96,7 @@
     <object>objects\obj_easytrap</object>
     <object>objects\obj_gore</object>
     <object>objects\obj_goreammo</object>
+    <object>objects\obj_gorepage</object>
     <object>objects\obj_gameover</object>
     <object>objects\obj_parentbuilding</object>
     <object>objects\obj_slash</object>
@@ -91,10 +109,15 @@
     <object>objects\obj_buildingground</object>
     <object>objects\obj_spithitbox</object>
     <object>objects\obj_sign</object>
+    <object>objects\obj_instructions</object>
+    <object>objects\obj_scale</object>
+    <object>objects\obj_sky</object>
+    <object>objects\obj_title</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>
     <room>rooms\rm_main</room>
+    <room>rooms\room2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

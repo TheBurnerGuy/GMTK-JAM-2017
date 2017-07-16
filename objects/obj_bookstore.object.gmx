@@ -28,6 +28,7 @@
             <string>hspeed = -20
 signObj = instance_create(self.x + 276, self.y + 104, obj_sign)
 signObj.sprite_index = spr_sign_bookstore
+count = 0 //for spammerino pagerino
 </string>
           </argument>
         </arguments>

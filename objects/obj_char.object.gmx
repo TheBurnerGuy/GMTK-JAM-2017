@@ -47,7 +47,7 @@ rifleGotten = false
 
 ladderOffset = 10 //offset to ladder in order to trigger climbing (CHANGE LATER!)
 ladderCreateOffset = 60 //offset to show key spamming thing
-ladderClimbRate = 32
+ladderClimbRate = 20
 enemyOffset = 48 //for slashing hit detection
 bulletOffsetX = 42
 bulletOffsetY = -14
@@ -57,6 +57,7 @@ shootImageSpeed = 0.5
 
 
 alarm_set(0,4)
+alarm_set(90, 3) //pistol book xDDDDD
 </string>
           </argument>
         </arguments>
@@ -117,6 +118,30 @@ if instance_exists(obj_parentbuilding){
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>page = instance_create(self.x, self.y, obj_gorepage)
+page.sprite_index = spr_pistolbook
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="2">
@@ -232,15 +257,17 @@ actionButton = keyboard_check_pressed(ord("C"))
 
 //Climbing
 if moveButton and instance_exists(obj_ladderEvent){
-    self.y += ladderClimbRate
-    if position_meeting(self.x, self.y, obj_ladder){
+    self.y -= ladderClimbRate
+    if not position_meeting(self.x, self.y, obj_ladder){
         with(obj_ladderEvent){
             instance_destroy()
         }
         canMove = true
         canFight = true
         canAction = true
-        verticalSpeed = -15
+        verticalSpeed = -10
+        hspeed = 0
+        alarm_set(0,1)
     }
 }
 
@@ -249,12 +276,13 @@ else if moveButton and canMove{
     //start to climb ladder
     var ladder = instance_place(self.x, self.y, obj_ladder)
     if ladder{
-        self.x = ladder.x
+        self.x = ladder.x+32
         self.y = ladder.y
         canMove = false
         canFight = false
         canAction = false
-        hspeed = -20
+        hspeed = -15
+        vspeed = 0
         instance_create(self.x + ladderCreateOffset, self.y, obj_ladderEvent)
     }
     
@@ -321,10 +349,16 @@ if actionButton and canAction{
         //upgrade hierarchy: pistol -&gt; SMG -&gt; rifle
         if pistolGotten == false{
             pistolGotten = true
+            gun = instance_create(self.x, self.y, obj_goreammo)
+            gun.sprite_index = spr_pistol
         } else if smgUnlocked and smgGotten == false{
             smgGotten = true
+            gun = instance_create(self.x, self.y, obj_goreammo)
+            gun.sprite_index = spr_smg
         } else if rifleUnlocked and rifleGotten == false{
             rifleGotten = true
+            gun = instance_create(self.x, self.y, obj_goreammo)
+            gun.sprite_index = spr_rifle
         } else {
             if rifleGotten{ //50% rifle, 30% SMG, 20% pistol
                 var tempRand = irandom_range(1,10)
@@ -356,26 +390,64 @@ if actionButton and canAction{
             }
         }
     }else if place_meeting(self.x, self.y, obj_bookstore){
-    
+        obj_bookstore.count++
+        if obj_bookstore.count &gt;= 5{
+            //upgrade hierarchy for weapons
+            if smgUnlocked == false{
+                smgUnlocked = true
+                page = instance_create(self.x, self.y, obj_gorepage)
+                page.sprite_index = spr_smgbook
+            } else if smgGotten and rifleUnlocked == false{
+                rifleUnlocked = true
+                page = instance_create(self.x, self.y, obj_gorepage)
+                page.sprite_index = spr_riflebook
+            }
+        }
+        //throw pages up in the air
+        page = instance_create(self.x, self.y, obj_gorepage)
     }else if place_meeting(self.x, self.y, obj_pawnstore){
         if rifleGotten{ //50% rifle, 30% SMG, 20% pistol
             var tempRand = irandom_range(1,10)
             if tempRand &gt; 5{
-                rifle += 2
+                if irandom_range(0,1) == 1{
+                    rifle += 5
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_rifle
+                }
             } else if tempRand &gt; 2 {
-                smg += 3
+                if irandom_range(0,1) == 1{
+                    smg += 6
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_smg
+                }
             } else{
-                pistol += 1
+                if irandom_range(0,1) == 1{
+                    pistol += 2
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_pistol
+                }
             }
         } else if smgGotten{//80% SMG, 20% pistol
             var tempRand = irandom_range(1,5)
             if tempRand &gt; 1{
-                smg += 3
+                if irandom_range(0,1) == 1{
+                    smg += 6
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_smg
+                }
             } else{
-                pistol += 1
+                if irandom_range(0,1) == 1{
+                    pistol += 2
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_pistol
+                }
             }
         } else { //100% pistol
-            pistol += 1
+            if irandom_range(0,1) == 1{
+                pistol += 2
+                ammo = instance_create(self.x, self.y, obj_goreammo)
+                ammo.sprite_index = spr_ammo_pistol
+            }
         }
     }
 }
@@ -465,6 +537,33 @@ if sprite_index == spr_survivor_rifle_attack
         or sprite_index == spr_survivor_knife_attack{
     sprite_index = spr_survivor_walk
     image_speed = defaultImageSpeed
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if instance_exists(obj_director){
+    if obj_director.highscore &gt; 150{
+        instance_destroy()
+    }
 }
 </string>
           </argument>

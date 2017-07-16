@@ -42,8 +42,12 @@ ds_list_delete(shuffleList, groundIndex)
 var roofShop = ds_list_find_value(shuffleList, irandom_range(0,1))
 ds_list_destroy(shuffleList)
 
-instance_create(self.x - obj_director.roomOffsetX3, obj_director.roomOffsetY3, groundShop)
-instance_create(self.x - obj_director.roomOffsetX3, obj_director.roomOffsetY4, roofShop)
+gs = instance_create(self.x - obj_director.roomOffsetX3, obj_director.roomOffsetY3, groundShop)
+rs = instance_create(self.x - obj_director.roomOffsetX3, obj_director.roomOffsetY4, roofShop)
+gs.hspeed = -15
+rs.hspeed = -15
+gs.signObj.hspeed = -15
+rs.signObj.hspeed = -15
 
 //generate obj_buildingground
 for(i = 0; i &lt; 800; i += 32){
