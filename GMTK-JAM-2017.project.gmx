@@ -21,6 +21,7 @@
     <sprite>sprites\spr_survivor_smg_attack</sprite>
     <sprite>sprites\spr_survivor_smg_move</sprite>
     <sprite>sprites\spr_survivor_walk</sprite>
+    <sprite>sprites\spr_slash</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -29,6 +30,7 @@
     <font>fonts\font_score</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_setupdirector</object>
     <object>objects\obj_director</object>
     <object>objects\obj_char</object>
     <object>objects\obj_ground</object>
@@ -43,6 +45,8 @@
     <object>objects\obj_easytrap</object>
     <object>objects\obj_gore</object>
     <object>objects\obj_gameover</object>
+    <object>objects\obj_parentbuilding</object>
+    <object>objects\obj_slash</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>

@@ -41,11 +41,122 @@ vertGravity = 1
 ladderOffset = 10 //offset to ladder in order to trigger climbing (CHANGE LATER!)
 ladderCreateOffset = 60 //offset to show key spamming thing
 ladderClimbRate = 10
-enemyOffset = 64
+enemyOffset = 48 //for slashing hit detection
 bulletOffsetX = 20
 bulletOffsetY = 0
+defaultImageSpeed = 1
+slashImageSpeed = 0.5
+
 
 alarm_set(0,4)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_create(self.x, self.y, obj_gore)
+instance_create(self.x, self.y, obj_gore)
+instance_create(self.x, self.y, obj_gore)
+instance_create(self.x, self.y, obj_gore)
+instance_create(self.x, self.y, obj_gore)
+if(obj_director.highscore &gt; global.highscore){
+    global.highscore = obj_director.highscore
+}
+instance_create(0,0,obj_gameover)
+with(obj_director){ //destroy director (save score??)
+    instance_destroy()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//trip towards dying Pos
+var startingPos = -100
+distance = self.x - startingPos 
+self.x -= distance * 0.04
+
+alarm_set(2,1)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//trip towards dying Pos
+var dyingPos = 30
+distance = self.x - dyingPos 
+self.x -= distance * 0.02
+
+if self.x &gt; 51{
+    alarm_set(1,1)
+}
 </string>
           </argument>
         </arguments>
@@ -100,9 +211,9 @@ if self.x &lt; 222{
             <kind>1</kind>
             <string>//Main script to check if player has pressed any buttons and trigger anything that needs to be triggered
 
-moveButton = keyboard_check(ord("Z"))
-combatButton = keyboard_check(ord("X"))
-actionButton = keyboard_check(ord("C"))
+moveButton = keyboard_check_pressed(ord("Z"))
+combatButton = keyboard_check_pressed(ord("X"))
+actionButton = keyboard_check_pressed(ord("C"))
 
 //Climbing
 if moveButton and instance_exists(obj_ladderEvent){
@@ -136,10 +247,22 @@ else if moveButton and canMove{
 //Combat
 if combatButton and canFight{
     //knife
-    enemy = instance_position(self.x + enemyOffset, self.y, obj_enemy)
-    if (enemy){
-        //TODO: some killing animations
-    
+    slash = instance_create(self.x+enemyOffset, self.y, obj_slash)
+    slashConfirm = false
+    with(slash){
+        enemy = instance_place(self.x, self.y, obj_enemy)
+        if enemy{
+            obj_char.slashConfirm = true
+            with(enemy){
+                instance_destroy()
+            }
+        }else{
+            instance_destroy()
+        }
+    }
+    if slashConfirm {
+        sprite_index = spr_survivor_knife_attack
+        image_speed = slashImageSpeed
     //else gun
     }else if rifle &gt; 0{
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
@@ -168,12 +291,18 @@ if ground != noone{
     self.y += verticalSpeed
     verticalSpeed += vertGravity
 }
+
+//ending stab animation
+if not instance_exists(obj_slash){
+    sprite_index = spr_survivor_walk
+    image_speed = defaultImageSpeed
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_enemy">
+    <event eventtype="4" ename="obj_easytrap">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -190,22 +319,34 @@ if ground != noone{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-if(obj_director.highscore &gt; global.highscore){
-    global.highscore = obj_director.highscore
+            <string>if self.x &gt; 200{//trip once
+    alarm_set(1,1)
+    alarm_set(0,300)
 }
-instance_create(0,0,obj_gameover)
-with(obj_director){ //destroy director (save score??)
-    instance_destroy()
+else{
+    alarm_set(2,1)//trip twice, die
+    alarm_set(11,45)
 }
-instance_destroy()
+
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>
