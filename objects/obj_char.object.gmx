@@ -302,8 +302,8 @@ if combatButton and canFight{
         if enemy{
             obj_char.slashConfirm = true
             with(enemy){
-                health -= 100
-                if health &lt;= 0{
+                Health -= 100
+                if Health &lt;= 0{
                     instance_destroy()
                 }else{
                     alarm_set(0,1) //trigger for showing health
@@ -460,6 +460,10 @@ if ground != noone{
 }else{
     self.y += verticalSpeed
     verticalSpeed += vertGravity
+}
+
+if place_meeting(self.x, self.y+1, obj_ground){
+    instance_create(self.x, self.y + 35, obj_dust)
 }
 </string>
           </argument>

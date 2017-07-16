@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>hspeed = -15
-health = 250
+Health = 250
 maxHealth = 250
 showHealth = false //for showing health bar
 healthOffsetX = 20

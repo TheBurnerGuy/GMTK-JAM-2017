@@ -70,6 +70,7 @@
     <sprite>sprites\spr_tower1</sprite>
     <sprite>sprites\spr_tower2</sprite>
     <sprite>sprites\spr_tower3</sprite>
+    <sprite>sprites\spr_dust</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -113,6 +114,7 @@
     <object>objects\obj_scale</object>
     <object>objects\obj_sky</object>
     <object>objects\obj_title</object>
+    <object>objects\obj_dust</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>

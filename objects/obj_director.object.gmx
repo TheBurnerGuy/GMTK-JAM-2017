@@ -46,7 +46,7 @@ roomOffsetX1 = 105 //for spitter zombie
 roomOffsetX3 = 100 //for shops in buildings
 
 alarm_set(0, 90) //alarm for generation
-alarm_set(1, 100) //alarm for increasing difficulty
+alarm_set(1, 1000) //alarm for increasing difficulty
 alarm_set(3, 30) //alarm for generating background
 </string>
           </argument>
@@ -127,12 +127,11 @@ difficulty++
 obj_sky.image_index = difficulty
 newDifficulty = true
 if difficulty == 1{
-    //alarm_set(1,1700)
-    alarm_set(1,100)
+    alarm_set(1,1700)
     obj_sky.image_index = 1
 }else if difficulty == 2{
     alarm_set(1,100)
-    //alarm_set(1,3000)
+    alarm_set(1,3000)
 }//else if difficulty == 3{
 //    alarm_set(1,3000)
 //}
@@ -241,7 +240,7 @@ if difficulty == 3 { //30% armored, 20% tank, 20% spitter, 20% trap, 10% store
             }
         }
     }
-    alarm_set(0,irandom_range(10,25))
+    alarm_set(0,irandom_range(17,25))
 }
 
 if difficulty == 4 { 

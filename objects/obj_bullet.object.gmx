@@ -80,9 +80,9 @@ if count &gt; 0 {
           <argument>
             <kind>1</kind>
             <string>//deal damage
-if other.health &gt; 0{
-    other.health -= damage
-    if other.health &lt;= 0{
+if other.Health &gt; 0{
+    other.Health -= damage
+    if other.Health &lt;= 0{
         with(other){
             instance_destroy()
         }
