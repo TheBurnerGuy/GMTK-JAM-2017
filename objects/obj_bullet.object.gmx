@@ -81,6 +81,7 @@ if count &gt; 0 {
             <kind>1</kind>
             <string>//deal damage
 if other.Health &gt; 0{
+    audio_play_sound(sound_hit,0,false)
     other.Health -= damage
     if other.Health &lt;= 0{
         with(other){

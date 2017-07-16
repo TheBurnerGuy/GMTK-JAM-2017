@@ -4,7 +4,13 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sound_jump</sound>
+    <sound>sound\sound_hit</sound>
+    <sound>sound\sound_shoot</sound>
+    <sound>sound\sound_pickup</sound>
+    <sound>sound\sound_music</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_char</sprite>
     <sprite>sprites\spr_ground</sprite>
@@ -71,6 +77,7 @@
     <sprite>sprites\spr_tower2</sprite>
     <sprite>sprites\spr_tower3</sprite>
     <sprite>sprites\spr_dust</sprite>
+    <sprite>sprites\spr_logo</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -115,6 +122,8 @@
     <object>objects\obj_sky</object>
     <object>objects\obj_title</object>
     <object>objects\obj_dust</object>
+    <object>objects\obj_skyscraper</object>
+    <object>objects\obj_logo</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>

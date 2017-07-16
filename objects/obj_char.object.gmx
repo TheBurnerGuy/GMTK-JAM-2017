@@ -80,7 +80,8 @@ alarm_set(90, 3) //pistol book xDDDDD
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(self.x, self.y, obj_gore)
+            <string>audio_play_sound(sound_hit,0,false)
+instance_create(self.x, self.y, obj_gore)
 instance_create(self.x, self.y, obj_gore)
 instance_create(self.x, self.y, obj_gore)
 instance_create(self.x, self.y, obj_gore)
@@ -258,6 +259,7 @@ actionButton = keyboard_check_pressed(ord("C"))
 //Climbing
 if moveButton and instance_exists(obj_ladderEvent){
     self.y -= ladderClimbRate
+    audio_play_sound(sound_jump,0,false)
     if not position_meeting(self.x, self.y, obj_ladder){
         with(obj_ladderEvent){
             instance_destroy()
@@ -287,7 +289,8 @@ else if moveButton and canMove{
     }
     
     //jump
-    if place_meeting(self.x, self.y + 1, obj_ground){ 
+    if place_meeting(self.x, self.y + 1, obj_ground){
+        audio_play_sound(sound_jump,0,false) 
         verticalSpeed = -10
     }
 }
@@ -301,6 +304,7 @@ if combatButton and canFight{
         enemy = instance_place(self.x, self.y, obj_enemy)
         if enemy{
             obj_char.slashConfirm = true
+            audio_play_sound(sound_hit,0,false)
             with(enemy){
                 Health -= 100
                 if Health &lt;= 0{
@@ -319,6 +323,7 @@ if combatButton and canFight{
         canFight = false
     //else gun
     }else if rifle &gt; 0{
+        audio_play_sound(sound_shoot,0,false)
         rifle--
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
         bullet.damage = rifleDmg
@@ -326,6 +331,7 @@ if combatButton and canFight{
         image_index = 0
         image_speed = shootImageSpeed
     }else if smg &gt; 2{
+        audio_play_sound(sound_shoot,0,false)
         smg -= 3
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
         bullet.damage = smgDmg
@@ -334,6 +340,7 @@ if combatButton and canFight{
         image_index = 0
         image_speed = shootImageSpeed
     }else if pistol &gt; 0{
+        audio_play_sound(sound_shoot,0,false)
         pistol--
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
         bullet.damage = pistolDmg
@@ -347,6 +354,7 @@ if combatButton and canFight{
 if actionButton and canAction{
     if place_meeting(self.x, self.y, obj_gunstore){
         //upgrade hierarchy: pistol -&gt; SMG -&gt; rifle
+        audio_play_sound(sound_pickup,0,false)
         if pistolGotten == false{
             pistolGotten = true
             gun = instance_create(self.x, self.y, obj_goreammo)
@@ -390,6 +398,7 @@ if actionButton and canAction{
             }
         }
     }else if place_meeting(self.x, self.y, obj_bookstore){
+        audio_play_sound(sound_pickup,0,false)
         obj_bookstore.count++
         if obj_bookstore.count &gt;= 5{
             //upgrade hierarchy for weapons
@@ -406,6 +415,7 @@ if actionButton and canAction{
         //throw pages up in the air
         page = instance_create(self.x, self.y, obj_gorepage)
     }else if place_meeting(self.x, self.y, obj_pawnstore){
+        audio_play_sound(sound_pickup,0,false)
         if rifleGotten{ //50% rifle, 30% SMG, 20% pistol
             var tempRand = irandom_range(1,10)
             if tempRand &gt; 5{
@@ -487,7 +497,8 @@ if place_meeting(self.x, self.y+1, obj_ground){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if self.x &gt; 200{//trip once
+            <string>audio_play_sound(sound_hit,0,false)
+if self.x &gt; 200{//trip once
     alarm_set(1,1)
     alarm_set(0,300)
 }

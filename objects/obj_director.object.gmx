@@ -48,6 +48,36 @@ roomOffsetX3 = 100 //for shops in buildings
 alarm_set(0, 90) //alarm for generation
 alarm_set(1, 1000) //alarm for increasing difficulty
 alarm_set(3, 30) //alarm for generating background
+alarm_set(4, 30) //alarm for generating background
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>shuffleList2 = ds_list_create()
+ds_list_add(shuffleList2, spr_tower1, spr_tower2, spr_tower3)
+spriteRand = ds_list_find_value(shuffleList2, irandom_range(0,2))
+scale = instance_create(room_width, 546, obj_skyscraper)
+scale.sprite_index = spriteRand
+ds_list_destroy(shuffleList2)
+alarm_set(4, irandom_range(25,50))
 </string>
           </argument>
         </arguments>
@@ -204,7 +234,7 @@ if difficulty == 2 { //30% zombie, 30% armored, 20% tank, 10% trap, 10% store
         }else{
             if storeAvailable{
                 storeAvailable = false
-                alarm_set(2,300)
+                alarm_set(2,150)
                 instance_create(room_width, roomOffsetY5, obj_building)
             } else {
                 instance_create(room_width, roomOffsetY1, obj_zombie) //apology zombie
@@ -233,7 +263,7 @@ if difficulty == 3 { //30% armored, 20% tank, 20% spitter, 20% trap, 10% store
         }else{
             if storeAvailable{
                 storeAvailable = false
-                alarm_set(2,300)
+                alarm_set(2,100)
                 instance_create(room_width, roomOffsetY5, obj_building)
             } else {
                 instance_create(room_width, roomOffsetY1, obj_armorzombie) //apology zombie
