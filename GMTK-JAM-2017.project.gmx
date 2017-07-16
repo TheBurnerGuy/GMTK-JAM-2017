@@ -11,16 +11,18 @@
     <sprite>sprites\spr_zombie</sprite>
     <sprite>sprites\spr_easytrap</sprite>
     <sprite>sprites\spr_gore</sprite>
-    <sprite>sprites\spr_survivor_gun_attack</sprite>
-    <sprite>sprites\spr_survivor_gun_move</sprite>
-    <sprite>sprites\spr_survivor_jump</sprite>
-    <sprite>sprites\spr_survivor_knife_attack</sprite>
-    <sprite>sprites\spr_survivor_knife_move</sprite>
-    <sprite>sprites\spr_survivor_rifle_attack</sprite>
-    <sprite>sprites\spr_survivor_rifle_move</sprite>
-    <sprite>sprites\spr_survivor_smg_attack</sprite>
-    <sprite>sprites\spr_survivor_smg_move</sprite>
-    <sprite>sprites\spr_survivor_walk</sprite>
+    <sprites name="spr_survivor">
+      <sprite>sprites\spr_survivor_gun_attack</sprite>
+      <sprite>sprites\spr_survivor_gun_move</sprite>
+      <sprite>sprites\spr_survivor_jump</sprite>
+      <sprite>sprites\spr_survivor_knife_attack</sprite>
+      <sprite>sprites\spr_survivor_knife_move</sprite>
+      <sprite>sprites\spr_survivor_rifle_attack</sprite>
+      <sprite>sprites\spr_survivor_rifle_move</sprite>
+      <sprite>sprites\spr_survivor_smg_attack</sprite>
+      <sprite>sprites\spr_survivor_smg_move</sprite>
+      <sprite>sprites\spr_survivor_walk</sprite>
+    </sprites>
     <sprite>sprites\spr_slash</sprite>
     <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_gunstore</sprite>
@@ -38,6 +40,19 @@
     <sprite>sprites\spr_armoredbar</sprite>
     <sprite>sprites\spr_tankbar</sprite>
     <sprite>sprites\spr_spitterbar</sprite>
+    <sprite>sprites\spr_building</sprite>
+    <sprite>sprites\spr_ammo_pistol</sprite>
+    <sprite>sprites\spr_ammo_rifle</sprite>
+    <sprite>sprites\spr_ammo_smg</sprite>
+    <sprite>sprites\spr_building1</sprite>
+    <sprite>sprites\spr_ladder1</sprite>
+    <sprite>sprites\spr_ladder2</sprite>
+    <sprite>sprites\spr_sign_bookstore</sprite>
+    <sprite>sprites\spr_sign_gunstore</sprite>
+    <sprite>sprites\spr_sign_pawnshop</sprite>
+    <sprite>sprites\spr_spitsmear</sprite>
+    <sprite>sprites\spr_swatzombie0_move</sprite>
+    <sprite>sprites\spr_swatzombie1_move</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -63,6 +78,7 @@
     <object>objects\obj_spitterzombie</object>
     <object>objects\obj_easytrap</object>
     <object>objects\obj_gore</object>
+    <object>objects\obj_goreammo</object>
     <object>objects\obj_gameover</object>
     <object>objects\obj_parentbuilding</object>
     <object>objects\obj_slash</object>
@@ -71,6 +87,10 @@
     <object>objects\obj_pawnstore</object>
     <object>objects\obj_healthbar</object>
     <object>objects\obj_healthMeter</object>
+    <object>objects\obj_building</object>
+    <object>objects\obj_buildingground</object>
+    <object>objects\obj_spithitbox</object>
+    <object>objects\obj_sign</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_title</room>

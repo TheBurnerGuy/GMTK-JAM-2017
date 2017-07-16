@@ -28,6 +28,9 @@
             <string>if instance_exists(parent){
     image_xscale = parent.health / parent.maxHealth * obj_healthbar.sprite_width
 }else{
+    with(obj_healthbar){
+        instance_destroy()
+    }
     instance_destroy()
 }
 

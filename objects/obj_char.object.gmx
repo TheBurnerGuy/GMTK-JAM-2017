@@ -47,7 +47,7 @@ rifleGotten = false
 
 ladderOffset = 10 //offset to ladder in order to trigger climbing (CHANGE LATER!)
 ladderCreateOffset = 60 //offset to show key spamming thing
-ladderClimbRate = 10
+ladderClimbRate = 32
 enemyOffset = 48 //for slashing hit detection
 bulletOffsetX = 42
 bulletOffsetY = -14
@@ -233,23 +233,28 @@ actionButton = keyboard_check_pressed(ord("C"))
 //Climbing
 if moveButton and instance_exists(obj_ladderEvent){
     self.y += ladderClimbRate
-    if position_meeting(self.x + 5, self.y, obj_ladder){
-        climbing = false
+    if position_meeting(self.x, self.y, obj_ladder){
+        with(obj_ladderEvent){
+            instance_destroy()
+        }
+        canMove = true
         canFight = true
         canAction = true
-        verticalSpeed = -20
+        verticalSpeed = -15
     }
 }
 
 //Move
 else if moveButton and canMove{
     //start to climb ladder
-    var ladder = instance_position(self.x + ladderOffset, self.y, obj_ladder)
-    if ladder != noone{
+    var ladder = instance_place(self.x, self.y, obj_ladder)
+    if ladder{
         self.x = ladder.x
         self.y = ladder.y
+        canMove = false
         canFight = false
         canAction = false
+        hspeed = -20
         instance_create(self.x + ladderCreateOffset, self.y, obj_ladderEvent)
     }
     
@@ -325,19 +330,28 @@ if actionButton and canAction{
                 var tempRand = irandom_range(1,10)
                 if tempRand &gt; 5{
                     rifle += 5
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_rifle
                 } else if tempRand &gt; 2 {
                     smg += 6
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_smg
                 } else{
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
                     pistol += 2
                 }
             } else if smgGotten{//80% SMG, 20% pistol
                 var tempRand = irandom_range(1,5)
                 if tempRand &gt; 1{
                     smg += 6
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
+                    ammo.sprite_index = spr_ammo_smg
                 } else{
+                    ammo = instance_create(self.x, self.y, obj_goreammo)
                     pistol += 2
                 }
             } else  { //100% pistol
+                ammo = instance_create(self.x, self.y, obj_goreammo)
                 pistol += 2
             }
         }

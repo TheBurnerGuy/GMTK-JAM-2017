@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>image_angle = irandom_range(0,270)
 vspeed = irandom_range(-8,-12)
-hspeed = irandom_range(-4,2)
+hspeed = irandom_range(-10,-4)
 gravity = irandom_range(1,2)
 </string>
           </argument>

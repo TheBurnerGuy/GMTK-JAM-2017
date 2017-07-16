@@ -34,14 +34,42 @@ difficulty = 0
 //4 = lighthouse sequence (???)
 highscore = 0
 newDifficulty = false
-
+storeAvailable = true
 
 roomOffsetY1 = 724 //for zombies
 roomOffsetY2 = 784 //for traps
-roomOffsetY3 = 640 //for shops
+roomOffsetY3 = 596 //for shops
+roomOffsetY4 = 404 //for roofshops
+roomOffsetY5 = 592 //for two-story buildings
+
+roomOffsetX1 = 105 //for spitter zombie
+roomOffsetX3 = 100 //for shops in buildings
 
 alarm_set(0, 90) //alarm for generation
 alarm_set(1, 1200) //alarm for increasing difficulty
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>storeAvailable = true
 </string>
           </argument>
         </arguments>
@@ -141,7 +169,13 @@ if difficulty == 2 { //30% zombie, 30% armored, 20% tank, 10% trap, 10% store
         }else if tempRand &gt; 1{
             instance_create(room_width, roomOffsetY2, obj_easytrap)
         }else{
-            instance_create(room_width, roomOffsetY3, obj_gunstore)
+            if storeAvailable{
+                storeAvailable = false
+                alarm_set(3,300)
+                instance_create(room_width, roomOffsetY5, obj_building)
+            } else {
+                instance_create(room_width, roomOffsetY1, obj_zombie) //apology zombie
+            }
         }
     }
     alarm_set(0,irandom_range(25,50))
@@ -159,11 +193,18 @@ if difficulty == 3 { //30% armored, 20% tank, 20% spitter, 20% trap, 10% store
         }else if tempRand &gt; 5{
             instance_create(room_width, roomOffsetY1, obj_tankzombie)
         }else if tempRand &gt; 3{
-            instance_create(room_width, roomOffsetY2, obj_spitterzombie)
+            instance_create(room_width, roomOffsetY2, obj_spithitbox)
+            instance_create(room_width + roomOffsetX1, roomOffsetY2, obj_spitterzombie)
         }else if tempRand &gt; 1{
             instance_create(room_width, roomOffsetY2, obj_easytrap)
         }else{
-            instance_create(room_width, roomOffsetY3, obj_gunstore)
+            if storeAvailable{
+                storeAvailable = false
+                alarm_set(3,300)
+                instance_create(room_width, roomOffsetY5, obj_building)
+            } else {
+                instance_create(room_width, roomOffsetY1, obj_armorzombie) //apology zombie
+            }
         }
     }
     alarm_set(0,irandom_range(20,35))
