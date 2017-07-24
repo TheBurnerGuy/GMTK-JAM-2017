@@ -30,11 +30,8 @@ canFight = true
 canAction = true
 
 pistol = 0
-pistolDmg = 50
 smg = 0
-smgDmg = 25
 rifle = 0
-rifleDmg = 75
 verticalSpeed = 0
 vertGravity = 1
 
@@ -42,12 +39,12 @@ pistolUnlocked = true
 pistolGotten = false
 smgUnlocked = false
 smgGotten = false
+smgCounter = 0;
 rifleUnlocked = false
 rifleGotten = false
 
 ladderOffset = 10 //offset to ladder in order to trigger climbing (CHANGE LATER!)
 ladderCreateOffset = 60 //offset to show key spamming thing
-ladderClimbRate = 20
 enemyOffset = 48 //for slashing hit detection
 bulletOffsetX = 42
 bulletOffsetY = -14
@@ -55,8 +52,7 @@ defaultImageSpeed = 1
 slashImageSpeed = 0.5
 shootImageSpeed = 0.5
 
-
-alarm_set(0,4)
+alarm[0] = 4;
 alarm_set(90, 3) //pistol book xDDDDD
 </string>
           </argument>
@@ -80,26 +76,21 @@ alarm_set(90, 3) //pistol book xDDDDD
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(sound_hit,0,false)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-instance_create(self.x, self.y, obj_gore)
-if(obj_director.highscore &gt; global.highscore){
-    global.highscore = obj_director.highscore
-}
-instance_create(0,0,obj_gameover)
-with(obj_director){ //destroy director (save score??)
-    instance_destroy()
+            <string>audio_play_sound(sound_hit, 0, false)
+repeat(5) instance_create(self.x, self.y, obj_gore)
+
+if(obj_director.highscore &gt; global.highscore)
+{
+    global.highscore = obj_director.highscore;
 }
 
-if instance_exists(obj_enemy){
-    obj_enemy.hspeed = 0
-}
-if instance_exists(obj_parentbuilding){
-    obj_parentbuilding.hspeed = 0
-}
+var temp = instance_create(0,0,obj_gameover);
+temp.highscore = obj_director.highscore;
+with(obj_director) instance_destroy();
+
+with(all) hspeed = 0;
+with(obj_dust) hspeed = -5;
+with(obj_bullet) hspeed = 40;
 </string>
           </argument>
         </arguments>
@@ -121,6 +112,36 @@ if instance_exists(obj_parentbuilding){
         <isnot>0</isnot>
       </action>
     </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Shoot the SMG in bursts (Disabled).
+
+/*
+audio_play_sound(sound_shoot, 0, false);
+smg--; smgCounter--;  
+instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet);
+
+if(smgCounter &gt; 0) alarm[4] = 8;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>
@@ -138,7 +159,8 @@ if instance_exists(obj_parentbuilding){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>page = instance_create(self.x, self.y, obj_gorepage)
+            <string>///Spawn a random page.
+page = instance_create(self.x, self.y, obj_gorepage)
 page.sprite_index = spr_pistolbook
 </string>
           </argument>
@@ -162,7 +184,7 @@ page.sprite_index = spr_pistolbook
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//trip towards dying Pos
+            <string>///Move survivor closer to dying position.
 var startingPos = -100
 distance = self.x - startingPos 
 self.x -= distance * 0.04
@@ -190,7 +212,7 @@ alarm_set(2,1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//trip towards dying Pos
+            <string>///Move survivor closer to dying position.
 var dyingPos = 30
 distance = self.x - dyingPos 
 self.x -= distance * 0.02
@@ -220,14 +242,12 @@ if self.x &gt; 51{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//initial walking towards starting post
-var startingPos = 224
-distance = startingPos - self.x
-self.x += distance * 0.02
+            <string>///Move towards starting position.
+distance = 224 - x;
+x += distance * 0.04;
 
-if self.x &lt; 222{
-    alarm_set(0,1)
-}
+if(self.x &lt; 225) alarm[0] = 1;
+
 </string>
           </argument>
         </arguments>
@@ -252,51 +272,27 @@ if self.x &lt; 222{
             <kind>1</kind>
             <string>//Main script to check if player has pressed any buttons and trigger anything that needs to be triggered
 
-moveButton = keyboard_check_pressed(ord("Z"))
-combatButton = keyboard_check_pressed(ord("X"))
-actionButton = keyboard_check_pressed(ord("C"))
-
-//Climbing
-if moveButton and instance_exists(obj_ladderEvent){
-    self.y -= ladderClimbRate
-    audio_play_sound(sound_jump,0,false)
-    if not position_meeting(self.x, self.y, obj_ladder){
-        with(obj_ladderEvent){
-            instance_destroy()
-        }
-        canMove = true
-        canFight = true
-        canAction = true
-        verticalSpeed = -10
-        hspeed = 0
-        alarm_set(0,1)
-    }
-}
-
 //Move
-else if moveButton and canMove{
-    //start to climb ladder
-    var ladder = instance_place(self.x, self.y, obj_ladder)
-    if ladder{
-        self.x = ladder.x+32
-        self.y = ladder.y
-        canMove = false
-        canFight = false
-        canAction = false
-        hspeed = -15
-        vspeed = 0
-        instance_create(self.x + ladderCreateOffset, self.y, obj_ladderEvent)
+if(Input.climb &amp;&amp; canMove)
+{
+    //If touching ladder, jump to the top of ladder...
+    var ladder = instance_place(self.x, self.y, obj_ladder);
+    if(ladder)
+    {
+        x = ladder.x + 32;
+        y = ladder.y;
     }
     
-    //jump
-    if place_meeting(self.x, self.y + 1, obj_ground){
-        audio_play_sound(sound_jump,0,false) 
-        verticalSpeed = -10
+    //...otherwise jump.
+    if place_meeting(self.x, self.y + 1, obj_ground)
+    {
+        audio_play_sound(sound_jump,0,false) ;
+        verticalSpeed = -12;
     }
 }
 
 //Combat
-if combatButton and canFight{
+if Input.fight and canFight{
     //knife
     slash = instance_create(self.x+enemyOffset, self.y, obj_slash)
     slashConfirm = false
@@ -306,8 +302,8 @@ if combatButton and canFight{
             obj_char.slashConfirm = true
             audio_play_sound(sound_hit,0,false)
             with(enemy){
-                Health -= 100
-                if Health &lt;= 0{
+                hp--;
+                if hp &lt; 1{
                     instance_destroy()
                 }else{
                     alarm_set(0,1) //trigger for showing health
@@ -325,33 +321,46 @@ if combatButton and canFight{
     }else if rifle &gt; 0{
         audio_play_sound(sound_shoot,0,false)
         rifle--
-        bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
-        bullet.damage = rifleDmg
+        bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_rifleBullet)
         sprite_index = spr_survivor_rifle_attack
         image_index = 0
         image_speed = shootImageSpeed
-    }else if smg &gt; 2{
-        audio_play_sound(sound_shoot,0,false)
-        smg -= 3
-        bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
-        bullet.damage = smgDmg
-        bullet.count = 2
+    }/*else if smg &gt; 0{
+        if(smg &lt; 3) smgCounter = smg;
+        else smgCounter = 3;
+        
+        alarm[4] = 1;
+        
         sprite_index = spr_survivor_smg_attack
         image_index = 0
-        image_speed = shootImageSpeed
-    }else if pistol &gt; 0{
+        image_speed = shootImageSpeed 
+    }*/else if (pistol &gt; 0 &amp;&amp; smg &lt; 1){
         audio_play_sound(sound_shoot,0,false)
         pistol--
         bullet = instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet)
-        bullet.damage = pistolDmg
         sprite_index = spr_survivor_gun_attack
         image_index = 0
         image_speed = shootImageSpeed
     }
 }
+else if(Input.fightHold &amp;&amp; canFight)
+{
+        if(smg &gt; 0 &amp;&amp; rifle &lt; 1 &amp;&amp; alarm[4] &lt; 1)
+        {
+            smg--;
+            instance_create(self.x + bulletOffsetX, self.y + bulletOffsetY, obj_bullet);
+            audio_play_sound(sound_shoot,0,false);
+        
+            sprite_index = spr_survivor_smg_attack;
+            image_index = 0
+            image_speed = shootImageSpeed;
+            alarm[4] = 3;
+        }
+
+}
 
 //Action
-if actionButton and canAction{
+if Input.action and canAction{
     if place_meeting(self.x, self.y, obj_gunstore){
         //upgrade hierarchy: pistol -&gt; SMG -&gt; rifle
         audio_play_sound(sound_pickup,0,false)
@@ -371,7 +380,7 @@ if actionButton and canAction{
             if rifleGotten{ //50% rifle, 30% SMG, 20% pistol
                 var tempRand = irandom_range(1,10)
                 if tempRand &gt; 5{
-                    rifle += 5
+                    rifle += 3
                     ammo = instance_create(self.x, self.y, obj_goreammo)
                     ammo.sprite_index = spr_ammo_rifle
                 } else if tempRand &gt; 2 {
@@ -420,7 +429,7 @@ if actionButton and canAction{
             var tempRand = irandom_range(1,10)
             if tempRand &gt; 5{
                 if irandom_range(0,1) == 1{
-                    rifle += 5
+                    rifle += 3
                     ammo = instance_create(self.x, self.y, obj_goreammo)
                     ammo.sprite_index = spr_ammo_rifle
                 }
@@ -507,6 +516,8 @@ else{
     alarm_set(11,45)
 }
 
+instance_create(x, y, obj_gore_trash);
+with(other) instance_destroy();
 </string>
           </argument>
         </arguments>

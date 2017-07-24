@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hspeed = -20
+            <string>event_inherited();
 signObj = instance_create(self.x + 276, self.y + 104, obj_sign)
 signObj.sprite_index = spr_sign_bookstore
 count = 0 //for spammerino pagerino

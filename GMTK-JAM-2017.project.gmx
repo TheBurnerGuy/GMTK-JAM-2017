@@ -12,72 +12,91 @@
     <sound>sound\sound_music</sound>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\spr_char</sprite>
-    <sprite>sprites\spr_ground</sprite>
-    <sprite>sprites\spr_zombie</sprite>
-    <sprite>sprites\spr_easytrap</sprite>
-    <sprite>sprites\spr_gore</sprite>
+    <sprites name="group_GUI">
+      <sprite>sprites\spr_logo</sprite>
+      <sprite>sprites\spr_title</sprite>
+      <sprite>sprites\spr_instructions</sprite>
+      <sprite>sprites\spr_pointer</sprite>
+      <sprite>sprites\spr_zombie_healthbar_2</sprite>
+      <sprite>sprites\spr_zombie_healthbar_3</sprite>
+      <sprite>sprites\spr_pistol_outline</sprite>
+      <sprite>sprites\spr_smg_outline</sprite>
+      <sprite>sprites\spr_rifle_outline</sprite>
+    </sprites>
     <sprites name="spr_survivor">
-      <sprite>sprites\spr_survivor_gun_attack</sprite>
-      <sprite>sprites\spr_survivor_gun_move</sprite>
+      <sprite>sprites\spr_survivor_walk</sprite>
       <sprite>sprites\spr_survivor_jump</sprite>
-      <sprite>sprites\spr_survivor_knife_attack</sprite>
       <sprite>sprites\spr_survivor_knife_move</sprite>
+      <sprite>sprites\spr_survivor_gun_move</sprite>
+      <sprite>sprites\spr_survivor_gun_attack</sprite>
+      <sprite>sprites\spr_survivor_knife_attack</sprite>
       <sprite>sprites\spr_survivor_rifle_attack</sprite>
       <sprite>sprites\spr_survivor_rifle_move</sprite>
       <sprite>sprites\spr_survivor_smg_attack</sprite>
       <sprite>sprites\spr_survivor_smg_move</sprite>
-      <sprite>sprites\spr_survivor_walk</sprite>
     </sprites>
+    <sprites name="group_zombie">
+      <sprites name="spr_zombie">
+        <sprite>sprites\spr_zombie0_move</sprite>
+        <sprite>sprites\spr_zombie1_move</sprite>
+        <sprite>sprites\spr_zombie2_move</sprite>
+        <sprite>sprites\spr_zombie3_move</sprite>
+      </sprites>
+      <sprite>sprites\spr_bigzombie_move</sprite>
+      <sprites name="spr_spitzombie">
+        <sprite>sprites\spr_spitzombie_idle</sprite>
+        <sprite>sprites\spr_spitzombie_spit</sprite>
+        <sprite>sprites\spr_spitsmear</sprite>
+      </sprites>
+      <sprites name="spr_swatzombie">
+        <sprite>sprites\spr_swatzombie0_move</sprite>
+        <sprite>sprites\spr_swatzombie1_move</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="group_pickups">
+      <sprite>sprites\spr_pistol</sprite>
+      <sprite>sprites\spr_smg</sprite>
+      <sprite>sprites\spr_rifle</sprite>
+      <sprite>sprites\spr_pistolbook</sprite>
+      <sprite>sprites\spr_smgbook</sprite>
+      <sprite>sprites\spr_riflebook</sprite>
+      <sprite>sprites\spr_ammo_pistol</sprite>
+      <sprite>sprites\spr_ammo_smg</sprite>
+      <sprite>sprites\spr_ammo_rifle</sprite>
+    </sprites>
+    <sprite>sprites\spr_ground</sprite>
+    <sprite>sprites\spr_easytrap</sprite>
+    <sprite>sprites\spr_gore</sprite>
+    <sprite>sprites\spr_paper</sprite>
     <sprite>sprites\spr_slash</sprite>
     <sprite>sprites\spr_bullet</sprite>
-    <sprite>sprites\spr_gunstore</sprite>
-    <sprite>sprites\spr_bookstore</sprite>
-    <sprite>sprites\spr_pawnstore</sprite>
-    <sprite>sprites\spr_bigzombie_move</sprite>
-    <sprite>sprites\spr_spitzombie_idle</sprite>
-    <sprite>sprites\spr_spitzombie_spit</sprite>
-    <sprite>sprites\spr_zombie0_move</sprite>
-    <sprite>sprites\spr_zombie1_move</sprite>
-    <sprite>sprites\spr_zombie2_move</sprite>
-    <sprite>sprites\spr_zombie3_move</sprite>
-    <sprite>sprites\spr_zombiehealth</sprite>
-    <sprite>sprites\spr_zombiebar</sprite>
-    <sprite>sprites\spr_armoredbar</sprite>
-    <sprite>sprites\spr_tankbar</sprite>
-    <sprite>sprites\spr_spitterbar</sprite>
-    <sprite>sprites\spr_building</sprite>
-    <sprite>sprites\spr_ammo_pistol</sprite>
-    <sprite>sprites\spr_ammo_rifle</sprite>
-    <sprite>sprites\spr_ammo_smg</sprite>
-    <sprite>sprites\spr_building1</sprite>
-    <sprite>sprites\spr_ladder1</sprite>
-    <sprite>sprites\spr_ladder2</sprite>
+    <sprite>sprites\spr_bigBullet</sprite>
+    <sprite>sprites\spr_tallLadder</sprite>
     <sprite>sprites\spr_sign_bookstore</sprite>
     <sprite>sprites\spr_sign_gunstore</sprite>
     <sprite>sprites\spr_sign_pawnshop</sprite>
-    <sprite>sprites\spr_spitsmear</sprite>
-    <sprite>sprites\spr_swatzombie0_move</sprite>
-    <sprite>sprites\spr_swatzombie1_move</sprite>
+    <sprite>sprites\spr_sky</sprite>
     <sprite>sprites\spr_shadowbg</sprite>
+    <sprite>sprites\spr_building1</sprite>
+    <sprite>sprites\spr_twoStoryBuilding</sprite>
     <sprite>sprites\spr_house1</sprite>
     <sprite>sprites\spr_house2</sprite>
     <sprite>sprites\spr_house3</sprite>
-    <sprite>sprites\spr_pistol</sprite>
-    <sprite>sprites\spr_smg</sprite>
-    <sprite>sprites\spr_rifle</sprite>
-    <sprite>sprites\spr_instructions</sprite>
-    <sprite>sprites\spr_sky</sprite>
-    <sprite>sprites\spr_paper</sprite>
-    <sprite>sprites\spr_pistolbook</sprite>
-    <sprite>sprites\spr_smgbook</sprite>
-    <sprite>sprites\spr_riflebook</sprite>
-    <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_tower1</sprite>
     <sprite>sprites\spr_tower2</sprite>
     <sprite>sprites\spr_tower3</sprite>
     <sprite>sprites\spr_dust</sprite>
-    <sprite>sprites\spr_logo</sprite>
+    <sprites name="obsolete">
+      <sprite>sprites\spr_zombie</sprite>
+      <sprite>sprites\spr_zombiebar</sprite>
+      <sprite>sprites\spr_armoredbar</sprite>
+      <sprite>sprites\spr_tankbar</sprite>
+      <sprite>sprites\spr_spitterbar</sprite>
+      <sprite>sprites\spr_gunstore</sprite>
+      <sprite>sprites\spr_bookstore</sprite>
+      <sprite>sprites\spr_pawnstore</sprite>
+    </sprites>
+    <sprite>sprites\spr_help</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -87,42 +106,57 @@
   <fonts name="fonts">
     <font>fonts\font_gameover</font>
     <font>fonts\font_score</font>
+    <font>fonts\font_ammo</font>
+    <font>fonts\font_version</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_setupdirector</object>
-    <object>objects\obj_director</object>
+    <objects name="Overlords">
+      <object>objects\syst_mainMenu</object>
+      <object>objects\obj_director</object>
+      <object>objects\obj_gameover</object>
+      <object>objects\Input</object>
+    </objects>
+    <objects name="group_enemies">
+      <object>objects\obj_enemy</object>
+      <object>objects\obj_zombie</object>
+      <object>objects\obj_armorzombie</object>
+      <object>objects\obj_tankzombie</object>
+      <object>objects\obj_spitterzombie</object>
+      <object>objects\obj_spithitbox</object>
+    </objects>
+    <objects name="group_environment">
+      <object>objects\obj_sky</object>
+      <object>objects\obj_ground</object>
+      <object>objects\obj_buildingground</object>
+      <object>objects\obj_ladder</object>
+      <object>objects\obj_ladderEvent</object>
+      <object>objects\obj_easytrap</object>
+    </objects>
+    <objects name="group_gore">
+      <object>objects\obj_gore</object>
+      <object>objects\obj_goreammo</object>
+      <object>objects\obj_gorepage</object>
+      <object>objects\obj_gore_trash</object>
+    </objects>
+    <objects name="group_building">
+      <object>objects\obj_parentbuilding</object>
+      <object>objects\obj_sign</object>
+      <object>objects\obj_gunstore</object>
+      <object>objects\obj_pawnstore</object>
+      <object>objects\obj_bookstore</object>
+      <object>objects\obj_building</object>
+      <object>objects\obj_skyscraper</object>
+      <object>objects\obj_scale</object>
+    </objects>
     <object>objects\obj_char</object>
-    <object>objects\obj_ground</object>
-    <object>objects\obj_ladder</object>
-    <object>objects\obj_ladderEvent</object>
-    <object>objects\obj_enemy</object>
+    <object>objects\obj_godChar</object>
     <object>objects\obj_bullet</object>
-    <object>objects\obj_zombie</object>
-    <object>objects\obj_armorzombie</object>
-    <object>objects\obj_tankzombie</object>
-    <object>objects\obj_spitterzombie</object>
-    <object>objects\obj_easytrap</object>
-    <object>objects\obj_gore</object>
-    <object>objects\obj_goreammo</object>
-    <object>objects\obj_gorepage</object>
-    <object>objects\obj_gameover</object>
-    <object>objects\obj_parentbuilding</object>
+    <object>objects\obj_rifleBullet</object>
     <object>objects\obj_slash</object>
-    <object>objects\obj_gunstore</object>
-    <object>objects\obj_bookstore</object>
-    <object>objects\obj_pawnstore</object>
-    <object>objects\obj_healthbar</object>
     <object>objects\obj_healthMeter</object>
-    <object>objects\obj_building</object>
-    <object>objects\obj_buildingground</object>
-    <object>objects\obj_spithitbox</object>
-    <object>objects\obj_sign</object>
     <object>objects\obj_instructions</object>
-    <object>objects\obj_scale</object>
-    <object>objects\obj_sky</object>
     <object>objects\obj_title</object>
     <object>objects\obj_dust</object>
-    <object>objects\obj_skyscraper</object>
     <object>objects\obj_logo</object>
   </objects>
   <rooms name="rooms">
